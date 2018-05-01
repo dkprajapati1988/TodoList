@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Todo App</title>
+
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="css/custom.css" rel="stylesheet">
+		
+		
+	</head>
+<body ng-app="toDoApp">
+
+    <div class="container-fluid top_bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Todo App</h1>
+                </div>
+            </div>        
+        </div>        
+    </div>
+
+    <div class="container todo_body" ng-controller="ToDoController">   
+         <div class="row">
+             <div class="col-sm-6">                 
+                 <h2 class="title">Todo List</h2>                 
+                 <div class="form">
+                     <div class="input-group">
+                         <input type="text" class="form-control" ng-model="task">
+                         <span class="input-group-btn">
+                             <button class="btn btn-default" type="button" ng-click="addTask()">
+                                 <span class="glyphicon glyphicon-plus"></span> Add Task
+                             </button>
+                         </span>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-sm-6 text-right" ng-show="deleteSelectStatus">
+                 <button class="btn btn-danger btn_delete" data-ng-click="deleteSelected()">Delete Selected Task</button>
+             </div>
+         </div>
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <table class="table table-striped" ng-show="tasks.length > 0">
+                    <thead>
+                        <tr>
+                            <th>
+                                <label class="chk_box">
+                                    <input type="checkbox" data-ng-model="IsAllChecked" title="Select All" data-ng-click="CheckUncheckAll()">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </th>
+                            <th>Todo Task</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="todo in tasks">
+                            <td>
+                                <label class="chk_box">
+                                    <input type="checkbox" data-ng-model="todo.done" title="Mark Complete" data-ng-change="CheckUncheckHeader()">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td><p class="task">{{todo.task}}</p></td>
+                            <td class="text-right"><button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" ng-click="deleteTask($index)"></span></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>            
+        </div>        
+    </div>	
+
+	<script src="js/angular.min.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
